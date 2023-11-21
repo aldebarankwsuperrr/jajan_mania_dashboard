@@ -194,6 +194,7 @@ def bobot_kategori_cuaca(similarity_vector):
         'hujan lebat': 'sum',
         'hujan lokal' : 'sum'
         }).reset_index()
+    bobot_cuaca_kategori= categories.merge(bobot_cuaca_kategori,left_on='category_id', right_on='category_id').drop(['category_id','tags'],axis=1)
     return bobot_cuaca_kategori
 
 def bobot(cuaca,bobot_cuaca_kategori):
@@ -433,13 +434,15 @@ with header_cuaca:
     st.markdown("""From the transaction history data, we can see how our customer behaviour in each weather
                 condition, what they purchased when it rain, or suny, or cloudy, so we can give
                 **weight in each categories** in every weather condition """)
-    cuaca = st.selectbox('Select a Weather', bobot_cuaca_kategori.columns[1:10])                           #16 nov 2023         
+    cuaca = st.selectbox('Select a Weather', bobot_cuaca_kategori.columns[1:10])
+    tabel_per_cuaca = bobot(cuaca,bobot_cuaca_kategori)                           #16 nov 2023         
     if cuaca:                                                                                             #16 nov 2023
-        tabel_per_cuaca = bobot(cuaca,bobot_cuaca_kategori)                                                            #16 nov 2023
+        tabel_per_cuaca = bobot(cuaca,bobot_cuaca_kategori)
+        #tabel_per_cuaca2=categories.merge(tabel_per_cuaca,left_on='category_id', right_on='category_id').drop(['category_id','tags'],axis=1)                                                      #16 nov 2023
         st.write(tabel_per_cuaca)
-        #st.write(categories.merge(tabel_per_cuaca,left_on='category_id', right_on='category_id').drop(['category_id','tags'],axis=1) )                                                                         #16 nov 2023
+        #st.write(tabel_per_cuaca2)                                                                         #16 nov 2023
 
-tabel_per_cuaca = bobot(cuaca,bobot_cuaca_kategori)
+
 cuaca_besok = weather_forcast["cuaca"].iloc[0].lower()
 forecast_atas=jajan_items.merge(tabel_per_cuaca,left_on='category_id', right_on='category_id').sort_values(by=cuaca_besok,ascending=False).head(20)
 tabel_forecast_atas= forecast_atas.merge(tabel_vendor, left_on='vendor_id', right_on='vendor_id')
