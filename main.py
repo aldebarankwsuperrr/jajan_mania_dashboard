@@ -194,7 +194,7 @@ def bobot_kategori_cuaca(similarity_vector):
         'hujan lebat': 'sum',
         'hujan lokal' : 'sum'
         }).reset_index()
-    bobot_cuaca_kategori= categories.merge(bobot_cuaca_kategori,left_on='category_id', right_on='category_id').drop(['category_id','tags'],axis=1)
+    bobot_cuaca_kategori= categories.merge(bobot_cuaca_kategori,left_on='category_id', right_on='category_id').drop(['tags'],axis=1)
     return bobot_cuaca_kategori
 
 def bobot(cuaca,bobot_cuaca_kategori):
@@ -474,6 +474,3 @@ with col_rendah:
 with st.sidebar:
     st.image(weather_icon)
     st.write(weather["cuaca"].iloc[0])
-
-
-
