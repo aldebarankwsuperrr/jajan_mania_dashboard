@@ -434,7 +434,7 @@ with header_cuaca:
     st.markdown("""From the transaction history data, we can see how our customer behaviour in each weather
                 condition, what they purchased when it rain, or suny, or cloudy, so we can give
                 **weight in each categories** in every weather condition """)
-    cuaca = st.selectbox('Select a Weather', bobot_cuaca_kategori.columns[1:10])
+    cuaca = st.selectbox('Select a Weather', bobot_cuaca_kategori.columns[2:10])
     tabel_per_cuaca = bobot(cuaca,bobot_cuaca_kategori)                           #16 nov 2023         
     if cuaca:                                                                                             #16 nov 2023
         tabel_per_cuaca = bobot(cuaca,bobot_cuaca_kategori)
