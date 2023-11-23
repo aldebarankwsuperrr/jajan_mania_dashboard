@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 sns.set(style='dark')
 
 def get_weather(time_now, number=1):
-    with urllib.request.urlopen("https://ibnux.github.io/BMKG-importer/cuaca/501193.json") as url:
+    with urllib.request.urlopen("https://ibnux.github.io/BMKG-importer/cuaca/501233.json") as url:
         weather = json.load(url)    
     weather_dataframe = pd.DataFrame.from_dict(weather, orient='columns')
     weather_dataframe["jamCuaca"] = pd.to_datetime(weather_dataframe["jamCuaca"])
@@ -20,7 +20,7 @@ def get_weather(time_now, number=1):
     return weather_dataframe
 
 def get_weather_forcast():
-    with urllib.request.urlopen("https://ibnux.github.io/BMKG-importer/cuaca/501193.json") as url:
+    with urllib.request.urlopen("https://ibnux.github.io/BMKG-importer/cuaca/501233.json") as url:
         weather = json.load(url)
     weather = pd.DataFrame(weather)
     weather_forcast = weather.loc[4:6, ["cuaca", "kodeCuaca"]].mode()
