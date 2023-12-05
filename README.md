@@ -15,7 +15,7 @@ This dashboard displays Snack Mania Data and Plots which are expected to help ma
 ```bash
   pip install -r requirements.txt
 ```
-- run the app.py
+- run the main.py
 ```bash
   streamlit run main.py
 ```
